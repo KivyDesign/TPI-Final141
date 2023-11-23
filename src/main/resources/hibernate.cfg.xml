@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-configuration PUBLIC
+        "-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+
+<hibernate-configuration>
+    <session-factory>
+        <!-- Configuración de la conexión a la base de datos -->
+        <property name="hibernate.connection.driver_class">com.mysql.cj.jdbc.Driver</property>
+        <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/db_argprog</property>
+        <property name="hibernate.connection.username">root</property>
+        <property name="hibernate.connection.password">NuEvOpAsSWoRd%23</property>
+
+        <!-- Configuración del dialecto de la base de datos -->
+        <property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
+        
+        <property name="hibernate.hbm2ddl.auto">update</property>
+        <!-- Configuración de mapeo de entidades -->
+
+        <mapping class="TPI.Final141.dominio.Cliente"/>
+        <mapping class="TPI.Final141.dominio.Tecnico"/>
+        <mapping class="TPI.Final141.dominio.Incidencia"/>
+        <mapping class="TPI.Final141.dominio.Categoria"/>
+        
+    </session-factory>
+</hibernate-configuration>
