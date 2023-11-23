@@ -3,12 +3,12 @@ TPI/Final141/repositorios/ClienteRepositorio.class
 TPI/Final141/dominio/Cliente.class
 TPI/Final141/config/HibernateUtil.class
 TPI/Final141/dominio/Especializacion.class
-TPI/Final141/TPfinal.class
 TPI/Final141/servicios/ClienteServicio.class
 TPI/Final141/dominio/HelpDesk.class
 TPI/Final141/dominio/RRHH.class
 TPI/Final141/dominio/TipoDeProblema.class
 TPI/Final141/repositorios/TecnicoRepositorio.class
+TPI/Final141/TPIFinal.class
 TPI/Final141/dominio/Area_Comercial.class
 TPI/Final141/dominio/Categoria.class
 TPI/Final141/dominio/Incidencia.class
