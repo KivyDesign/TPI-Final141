@@ -6,7 +6,7 @@ import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 import TPI.Final141.servicios.ClienteServicio;
 
-public class TPfinal {
+public class TPIFinal {
 
     public static void main(String[] args) {
         // Creo un nuevo cliente y lo guardarlo utilizando persistencia
