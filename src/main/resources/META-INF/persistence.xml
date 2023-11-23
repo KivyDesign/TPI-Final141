@@ -21,6 +21,9 @@ http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
             <mapping class="TPI.Final141.dominio.Tecnico"/>
             <mapping class="TPI.Final141.dominio.Incidencia"/>
             <mapping class="TPI.Final141.dominio.Categoria"/>
+            
+            <mapping class="TPI.Final141.dominio.Area_Comercial"/>
+            <mapping class="TPI.Final141.dominio.RRHH"/>
         </properties>
     </persistence-unit>
 </persistence>
