@@ -1,4 +1,4 @@
-# TPI Final UTN Comisión 141
+# TPI Final UTN Comisión 141 - Grupo 5
 
 ## Desarrollador Java intermedio
 
@@ -56,7 +56,7 @@
 <p>Es necesario que el proyecto Java sea creado como un proyecto "Maven" para poder añadir algunas dependencias. Se recomienda la utilización de la dependencia de [Lombok](https://projectlombok.org/) para facilitar la tarea repetitiva de generación de Setters y Getters de las clases.</p>
 <p></p>
 
-![image](https://github.com/KivyDesign/TPI-Comision141-Final/blob/main/IMGs/Diagrama%20ERD%20TPI-Final%20Comisi%C3%B3n%20141%20Grupo%205%20-%20Etapa%201.png)
+![image](https://github.com/KivyDesign/TPI-Final141/blob/main/IMGs/Diagrama%20ERD%20TPI-Final%20Comisi%C3%B3n%20141%20Grupo%205%20-%20Etapa%201.png)
 
 <p align="center">Diagrama ER</p>
 
