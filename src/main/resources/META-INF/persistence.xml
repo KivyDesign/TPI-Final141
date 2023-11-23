@@ -10,7 +10,7 @@ http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
             <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/db_argprog"/> <!-- Url de la base de datos -->
             <property name="javax.persistence.jdbc.user" value="root"/><!-- Usuario para acceder -->
             <property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver"/><!-- Driver de mysql, se debe añadir en el pom -->
-            <property name="javax.persistence.jdbc.password" value="NuEvOpAsSWoRd%23"/><!-- Contraseña del usuario de la BD -->
+            <property name="javax.persistence.jdbc.password" value=""/><!-- Contraseña del usuario de la BD -->
             <property name="javax.persistence.jdbc.schema-generation.database.action" value="create"/><!-- Cómo la implementacion interactua con la BD, ver material de la clase 6 -->
 
             <property name="org.hibernate.dialect" value="org.hibernate.dialect.MySQLDialect"/><!-- Dialecto MySQL para hibernate, opcional -->
