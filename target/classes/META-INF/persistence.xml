@@ -3,24 +3,20 @@
              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
              xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence
 http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
-    <persistence-unit name="a" transaction-type="RESOURCE_LOCAL"> <!-- Jpa con nombre 'a' -->
-        <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider> <!-- Implementacion de jpa que usaremos -->
-        <class>com.mycompany.sistema.modelo.Tecnico</class> <!-- Entidades a persistir, pueden ser varias -->
+    <persistence-unit name="JPA_PU" transaction-type="RESOURCE_LOCAL">
+        <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
+        <class>org.tpi_arg_prog.entities.Cliente</class>
+        <class>org.tpi_arg_prog.entities.Especialidad</class>
+        <class>org.tpi_arg_prog.entities.HelpDesk</class>
+        <class>org.tpi_arg_prog.entities.Incidencias</class>
+        <class>org.tpi_arg_prog.entities.RRHH</class>
+        <class>org.tpi_arg_prog.entities.Tecnico</class>
         <properties>
-            <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/db_argprog"/> <!-- Url de la base de datos -->
-            <property name="javax.persistence.jdbc.user" value="root"/><!-- Usuario para acceder -->
-            <property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver"/><!-- Driver de mysql, se debe añadir en el pom -->
-            <property name="javax.persistence.jdbc.password" value="NuEvOpAsSWoRd%23"/><!-- Contraseña del usuario de la BD -->
-            <property name="javax.persistence.jdbc.schema-generation.database.action" value="create"/><!-- Cómo la implementacion interactua con la BD, ver material de la clase 6 -->
-
-            <property name="org.hibernate.dialect" value="org.hibernate.dialect.MySQLDialect"/><!-- Dialecto MySQL para hibernate, opcional -->
-            <property name="org.hibernate.handlers" value="false"/><!-- Reducir LOG -->
-            
-            <!-- Configuración de mapeo de entidades -->
-            <mapping class="TPI.Final141.dominio.Cliente"/>
-            <mapping class="TPI.Final141.dominio.Tecnico"/>
-            <mapping class="TPI.Final141.dominio.Incidencia"/>
-            <mapping class="TPI.Final141.dominio.Categoria"/>
+            <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/db_tpi_arg?zeroDateTimeBehavior=convertToNull&amp;serverTimezone=UTC"/>
+            <property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver"/>
+            <property name="javax.persistence.jdbc.user" value="root"/>
+            <property name="javax.persistence.jdbc.password" value="NuEvOpAsSWoRd%23"/>
+            <property name="javax.persistence.schema-generation.database.action" value="drop-and-create"/>
         </properties>
     </persistence-unit>
 </persistence>
