@@ -65,9 +65,9 @@ public class MainDeCargaDeDatos {
                 "\nHelpDesks: "
                 + "\n---------------------------"
                 + "\nid: " + nuevoHelpDesk.getId()
-                + "\nidIncidente: " + nuevoHelpDesk.getIdIncidente()
-                + "\nidCliente: " + nuevoHelpDesk.getIdCliente()
-                + "\nidTécnico: " + nuevoHelpDesk.getIdTecnico()
+                + "\nidIncidente: " + nuevoHelpDesk.getIncidencias()
+                + "\nidCliente: " + nuevoHelpDesk.getCliente()
+                + "\nidTécnico: " + nuevoHelpDesk.getTecnico()
                 + "\nTiempo estipulado para resolución: " + nuevoHelpDesk.getTiempoEstipuladoParaResolucion()
                 + "\nTiempo extra para resolución: " + nuevoHelpDesk.getTiempoExtraParaResolucion()
         );
@@ -81,9 +81,9 @@ public class MainDeCargaDeDatos {
                         "\nHelpDesks: "
                         + "\n---------------------------"
                         + "\nid: " + helpdesk.getId()
-                        + "\nidIncidente: " + helpdesk.getIdIncidente()
-                        + "\nidCliente: " + helpdesk.getIdCliente()
-                        + "\nidTécnico: " + helpdesk.getIdTecnico()
+                        + "\nidIncidente: " + helpdesk.getIncidencias()
+                        + "\nidCliente: " + helpdesk.getCliente()
+                        + "\nidTécnico: " + helpdesk.getTecnico()
                         + "\nTiempo estipulado para resolución: " + helpdesk.getTiempoEstipuladoParaResolucion()
                         + "\nTiempo extra para resolución: " + helpdesk.getTiempoExtraParaResolucion()
                 );
@@ -172,12 +172,16 @@ public class MainDeCargaDeDatos {
         RRHHRepositorio rrhhRepositorio = new JpaRRHHRepositorio(dao);
         rrhhServicio = new RRHHServicio(rrhhRepositorio);
 
-        // Long id, String operador, Long idTecnico, int resueltas, int pendientes
-        RRHH rrhh1 = crearRRHH(1L, "Marilin", 1L, 28, 7);
+        Tecnico tecnico1 = tecnicoService.traerPorId(1L);
+        Tecnico tecnico2 = tecnicoService.traerPorId(2L);
+        Tecnico tecnico3 = tecnicoService.traerPorId(3L);
+        
+        // Long id, String operador,Tecnico tecnico, int resueltas, int pendientes
+        RRHH rrhh1 = crearRRHH(1L, "Marilin", tecnico1);
         rrhhServicio.agregarRRHH(rrhh1);
-        RRHH rrhh2 = crearRRHH(2L, "Josefina", 2L, 15, 3);
+        RRHH rrhh2 = crearRRHH(2L, "Josefina", tecnico2);
         rrhhServicio.agregarRRHH(rrhh2);
-        RRHH rrhh3 = crearRRHH(3L, "Luciana", 3L, 999, 0);
+        RRHH rrhh3 = crearRRHH(3L, "Luciana", tecnico3);
         rrhhServicio.agregarRRHH(rrhh3);
 
         // Probando metodo traerPorId(id)
@@ -188,8 +192,6 @@ public class MainDeCargaDeDatos {
                 + "\nid: " + nuevoRRHH.getId()
                 + "\nOperador: " + nuevoRRHH.getOperador()
                 + "\nTécnico: " + nuevoRRHH.getTecnico()
-                + "\nIncidencias Resueltas: " + nuevoRRHH.getIncidenciasResueltas()
-                + "\nIncidencias Pendientes: " + nuevoRRHH.getIncidenciasPendientes()
         );
     }
 
@@ -201,11 +203,11 @@ public class MainDeCargaDeDatos {
         tecnicoService = new TecnicoService(tecnicoRepositorio);
 
         // Long id, String nombre, String apellido, int resolucion, especialidades
-        Tecnico tecnico1 = crearTecnico(1L, "Gustavo", "Torres", 19);
+        Tecnico tecnico1 = crearTecnico(1L, "Gustavo", "Torres", 2, 45, 19);
         tecnicoService.agregarTecnico(tecnico1);
-        Tecnico tecnico2 = crearTecnico(2L, "German", "Salvatierra", 22);
+        Tecnico tecnico2 = crearTecnico(2L, "German", "Salvatierra", 4, 34, 22);
         tecnicoService.agregarTecnico(tecnico2);
-        Tecnico tecnico3 = crearTecnico(3L, "Guido", "Sosa", 20);
+        Tecnico tecnico3 = crearTecnico(3L, "Guido", "Sosa", 45, 34, 20);
         tecnicoService.agregarTecnico(tecnico3);
 
         // Probando metodo traerPorId(id)
@@ -216,6 +218,8 @@ public class MainDeCargaDeDatos {
                 + "\nid: " + nuevoTecnico.getId()
                 + "\nNombre: " + nuevoTecnico.getNombre()
                 + "\nApellido: " + nuevoTecnico.getApellido()
+                + "\nIncidencias Resueltas: " + nuevoTecnico.getIncidenciasResueltas()
+                + "\nIncidencias Pendientes: " + nuevoTecnico.getIncidenciasPendientes()
                 + "\nTiempo de Resolución: " + nuevoTecnico.getTiempoResolucion() + " hs\n"
                 + "\nEspecialidades: " + nuevoTecnico.getEspecialidades().subList(0, 2)
         );
@@ -239,14 +243,14 @@ public class MainDeCargaDeDatos {
         }
     }
 
-    private static HelpDesk crearHelpDesk(Long id, Long idIncidente, Long idCliente, Long idTecnico, LocalDate tiempoEstipuladoParaResolucion, LocalDate tiempoExtraParaResolucion) {
+    private static HelpDesk crearHelpDesk(Long id, Incidencias idIncidente, Cliente idCliente, Tecnico idTecnico, LocalDate tiempoEstipuladoParaResolucion, LocalDate tiempoExtraParaResolucion) {
         // Long id, Long idIncidente, Long idCliente, Long idTecnico, 
         // LocalDate tiempoEstipuladoParaResolucion, LocalDate tiempoExtraParaResolucion
         HelpDesk helpDesk = new HelpDesk();
         helpDesk.setId(id);
-        helpDesk.setIdIncidente(idIncidente);
-        helpDesk.setIdCliente(idCliente);
-        helpDesk.setIdTecnico(idTecnico);
+        helpDesk.setIncidencias(idIncidente);
+        helpDesk.setCliente(idCliente);
+        helpDesk.setTecnico(idTecnico);
         helpDesk.setTiempoEstipuladoParaResolucion(tiempoEstipuladoParaResolucion);
         helpDesk.setTiempoExtraParaResolucion(tiempoExtraParaResolucion);
         return helpDesk;
@@ -278,22 +282,23 @@ public class MainDeCargaDeDatos {
         return incidencias;
     }
 
-    private static RRHH crearRRHH(Long id, String operador, Long idTecnico, int resueltas, int pendientes) {
+    private static RRHH crearRRHH(Long id, String operador, Tecnico tecnico ) {
         // Long id, String operador, Long idTecnico, int resueltas, int pendientes
         RRHH rrhh = new RRHH();
         rrhh.setId(id);
         rrhh.setOperador(operador);
-        rrhh.setTecnico(idTecnico);
-        rrhh.setIncidenciasResueltas(resueltas);
-        rrhh.setIncidenciasPendientes(pendientes);
+        rrhh.setTecnico(tecnico);
+
         return rrhh;
     }
 
-    private static Tecnico crearTecnico(Long id, String nombre, String apellido, int resolucion) {
+    private static Tecnico crearTecnico(Long id, String nombre, String apellido, int resueltas, int pendientes, int resolucion) {
         Tecnico tecnico = new Tecnico();
         tecnico.setId(id);
         tecnico.setNombre(nombre);
         tecnico.setApellido(apellido);
+        tecnico.setIncidenciasResueltas(resueltas);
+        tecnico.setIncidenciasPendientes(pendientes);
         tecnico.setTiempoResolucion(resolucion);
         tecnico.getEspecialidades().add(crearEspecialidad(1L, "Informatico"));
         tecnico.getEspecialidades().add(crearEspecialidad(2L, "Fisico"));

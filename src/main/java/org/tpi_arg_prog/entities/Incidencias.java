@@ -13,9 +13,6 @@ public class Incidencias {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
-//    private Long idTecnico;
-//    private Long idCliente;
     private String tipo;
     private String descripcion;
     private LocalDate fechaDeApertura;

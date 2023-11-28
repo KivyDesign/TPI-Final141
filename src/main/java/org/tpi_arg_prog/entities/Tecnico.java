@@ -16,6 +16,8 @@ public class Tecnico {
 
     private String nombre;
     private String apellido;
+    private int incidenciasResueltas;
+    private int incidenciasPendientes;
     private int tiempoResolucion;
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
 //    @OneToMany(mappedBy = "tecnico")

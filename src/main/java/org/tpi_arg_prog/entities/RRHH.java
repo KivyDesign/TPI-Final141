@@ -15,10 +15,11 @@ public class RRHH {
     private Long id;
 
     private String operador;
-    private Long tecnico;
-    private int incidenciasResueltas;
-    private int incidenciasPendientes;
-
+//    private Long tecnico;
+   
+    @ManyToOne
+    @JoinColumn(name = "idTecnico", referencedColumnName = "id")
+    private Tecnico tecnico;
 //    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
 //    private List<Especialidad> especialidades = new ArrayList<>();
 

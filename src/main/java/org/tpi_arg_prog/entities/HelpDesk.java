@@ -15,12 +15,20 @@ public class HelpDesk {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private Long idIncidente;
-    private Long idCliente;
-    private Long idTecnico;
+//    private Long idIncidente;
+//    private Long idCliente;
+//    private Long idTecnico;
     private LocalDate tiempoEstipuladoParaResolucion;
     private LocalDate tiempoExtraParaResolucion;
-
+    @ManyToOne
+    @JoinColumn(name = "idTecnico", referencedColumnName = "id")
+    private Tecnico tecnico;
+    @ManyToOne
+    @JoinColumn(name = "idCliente", referencedColumnName = "id")
+    private Cliente cliente;
+    @ManyToOne
+    @JoinColumn(name = "idIcidente", referencedColumnName = "id")
+    private Incidencias incidencias;
 //    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
 //    private List<Especialidad> especialidades = new ArrayList<>();
 
