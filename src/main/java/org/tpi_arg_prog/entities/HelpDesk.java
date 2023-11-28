@@ -21,14 +21,14 @@ public class HelpDesk {
     private LocalDate tiempoEstipuladoParaResolucion;
     private LocalDate tiempoExtraParaResolucion;
     @ManyToOne
-    @JoinColumn(name = "idTecnico", referencedColumnName = "id")
-    private Tecnico tecnico;
+    @JoinColumn(name = "idIncidente", referencedColumnName = "id")
+    private Incidencias incidencias;
     @ManyToOne
     @JoinColumn(name = "idCliente", referencedColumnName = "id")
     private Cliente cliente;
     @ManyToOne
-    @JoinColumn(name = "idIcidente", referencedColumnName = "id")
-    private Incidencias incidencias;
+    @JoinColumn(name = "idTecnico", referencedColumnName = "id")
+    private Tecnico tecnico;
 //    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
 //    private List<Especialidad> especialidades = new ArrayList<>();
 

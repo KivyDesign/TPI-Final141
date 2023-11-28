@@ -40,8 +40,8 @@ public class MainDeCargaDeDatos {
         iniciarTecnico();
         iniciarRRHH();
         iniciarClientes();
-        iniciarHelpDesk();
         iniciarIncidencias();
+        iniciarHelpDesk();
     }
 
     private static void iniciarHelpDesk() {
@@ -52,11 +52,20 @@ public class MainDeCargaDeDatos {
         HelpDeskRepositorio helpDeskRepositorio = new JpaHelpDeskRepositorio(dao);
         helpDeskServicio = new HelpDeskServicio(helpDeskRepositorio);
 
-        // Long id, Long idIncidente, Long idCliente, Long idTecnico,
+        Incidencias incidencias1 = incidenciasServicio.traerPorId(1L);
+        Incidencias incidencias2 = incidenciasServicio.traerPorId(2L);
+
+        Cliente cliente1 = clienteService.traerPorId(3L);
+        Cliente cliente2 = clienteService.traerPorId(2L);
+
+        Tecnico tecnico1 = tecnicoService.traerPorId(2L);
+        Tecnico tecnico2 = tecnicoService.traerPorId(1L);
+
+        // Long id, Incidencias incidencias, Cliente cliente, Tecnico tecnico,
         // LocalDate tiempoEstipuladoParaResolucion, LocalDate tiempoExtraParaResolucion
-        HelpDesk helpDesk1 = crearHelpDesk(1L, 2L, 3L, 2L, hoy, hoy);
+        HelpDesk helpDesk1 = crearHelpDesk(1L, incidencias1, cliente1, tecnico1, hoy, hoy);
         helpDeskServicio.agregarHelpDesk(helpDesk1);
-        HelpDesk helpDesk2 = crearHelpDesk(2L, 3L, 2L, 1L, hoy, hoy);
+        HelpDesk helpDesk2 = crearHelpDesk(2L, incidencias2, cliente2, tecnico2, hoy, hoy);
         helpDeskServicio.agregarHelpDesk(helpDesk2);
 
         // Probando metodo traerPorId(id)
@@ -146,9 +155,20 @@ public class MainDeCargaDeDatos {
         IncidenciasRepositorio incidenciasRepositorio = new JpaIncidenciasRepositorio(dao);
         incidenciasServicio = new IncidenciasServicio(incidenciasRepositorio);
 
-        // incidenciasServicio
-        Incidencias incidencias = crearIncidencias();
-        incidenciasServicio.agregarIncidencias(incidencias);
+        // Long id, String tipo, String descripcion, LocalDate fechaDeApertura,
+        // LocalDate fechaDeCierre,Long tecnico, long cliente
+        LocalDate hoy = LocalDate.now();
+        Incidencias incidencias1 = crearIncidencias(
+                1L, "Yerba Mate",
+                "¡Se acabo la Yerba pal mate!. ¿Alguien que baje y compre?", hoy, hoy, 1L, 1L
+        );
+        incidenciasServicio.agregarIncidencias(incidencias1);
+        
+        Incidencias incidencias2 = crearIncidencias(
+                2L, "Azucar pal Mate",
+                "¡Se acabo el Azucar pal mate!. ¿Alguien que baje y compre?", hoy, hoy, 1L, 1L
+        );
+        incidenciasServicio.agregarIncidencias(incidencias2);
 
         // Probando metodo traerPorId(id)
         Incidencias nuevoIncidencias = incidenciasServicio.traerPorId(1L);
@@ -175,7 +195,7 @@ public class MainDeCargaDeDatos {
         Tecnico tecnico1 = tecnicoService.traerPorId(1L);
         Tecnico tecnico2 = tecnicoService.traerPorId(2L);
         Tecnico tecnico3 = tecnicoService.traerPorId(3L);
-        
+
         // Long id, String operador,Tecnico tecnico, int resueltas, int pendientes
         RRHH rrhh1 = crearRRHH(1L, "Marilin", tecnico1);
         rrhhServicio.agregarRRHH(rrhh1);
@@ -268,21 +288,23 @@ public class MainDeCargaDeDatos {
         return cliente;
     }
 
-    private static Incidencias crearIncidencias() {
-        Tecnico nuevoTecnico = tecnicoService.traerPorId(1L);
-        Cliente nuevoCliente = clienteService.traerPorId(1L);
+    private static Incidencias crearIncidencias(Long id, String tipo, String descripcion, LocalDate fechaDeApertura, LocalDate fechaDeCierre, Long tecnico, Long cliente) {
+        // Long id, String tipo, String descripcion, LocalDate fechaDeApertura,
+        // LocalDate fechaDeCierre,Long tecnico, Long cliente
+        Tecnico nuevoTecnico = tecnicoService.traerPorId(tecnico);
+        Cliente nuevoCliente = clienteService.traerPorId(cliente);
         Incidencias incidencias = new Incidencias();
-        incidencias.setId(1L);
+        incidencias.setId(id);
         incidencias.setTecnico(nuevoTecnico);
         incidencias.setCliente(nuevoCliente);
-        incidencias.setTipo("Yerba Mate");
-        incidencias.setDescripcion("¡Se acabo la Yerba pal mate!. ¿Alguien que baje y compre?");
-        incidencias.setFechaDeApertura(LocalDate.EPOCH);
-        incidencias.setFechaDeCierre(LocalDate.EPOCH);
+        incidencias.setTipo(tipo);
+        incidencias.setDescripcion(descripcion);
+        incidencias.setFechaDeApertura(fechaDeApertura);
+        incidencias.setFechaDeCierre(fechaDeCierre);
         return incidencias;
     }
 
-    private static RRHH crearRRHH(Long id, String operador, Tecnico tecnico ) {
+    private static RRHH crearRRHH(Long id, String operador, Tecnico tecnico) {
         // Long id, String operador, Long idTecnico, int resueltas, int pendientes
         RRHH rrhh = new RRHH();
         rrhh.setId(id);
