@@ -1,5 +1,6 @@
 package org.tpi_arg_prog.entities.repository;
 
+import java.time.LocalDate;
 import org.tpi_arg_prog.entities.Incidencias;
 
 import java.util.List;
@@ -16,5 +17,7 @@ public interface IncidenciasRepositorio {
     void eliminarIncidencias(Incidencias incidencias);
 
     List<Incidencias> traerTodosIncidencias();
+    
+    List<Incidencias> traerTodoIncidenciasEntreFechas(LocalDate fecha1, LocalDate fecha2);
 
 }

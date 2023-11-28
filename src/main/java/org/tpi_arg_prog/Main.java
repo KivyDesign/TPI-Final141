@@ -58,5 +58,6 @@ public class Main {
          *       determinada especialidad en los últimos N días
          *    c. Quién fue el técnico que más rápido resolvió los incidentes
          */
+        
     }
 }

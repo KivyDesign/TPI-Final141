@@ -1,5 +1,6 @@
 package org.tpi_arg_prog.services;
 
+import java.time.LocalDate;
 import org.tpi_arg_prog.entities.Incidencias;
 import org.tpi_arg_prog.entities.repository.IncidenciasRepositorio;
 
@@ -33,6 +34,10 @@ public class IncidenciasServicio {
 
     public List<Incidencias> traerTodosIncidencias() {
         return incidenciasRepositorio.traerTodosIncidencias();
+    }
+
+    public List<Incidencias> traerTodoIncidenciasEntreFechas(LocalDate fecha1, LocalDate fecha2) {
+        return incidenciasRepositorio.traerTodoIncidenciasEntreFechas(fecha1, fecha2);
     }
 
 }

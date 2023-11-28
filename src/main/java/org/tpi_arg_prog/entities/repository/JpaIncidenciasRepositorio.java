@@ -1,5 +1,6 @@
 package org.tpi_arg_prog.entities.repository;
 
+import java.time.LocalDate;
 import org.tpi_arg_prog.entities.Incidencias;
 import org.tpi_arg_prog.entities.repository.dao.DAO;
 
@@ -92,6 +93,22 @@ public class JpaIncidenciasRepositorio implements IncidenciasRepositorio {
         EntityManager entityManager = dao.getEntityManager();
         try {
             return entityManager.createQuery("SELECT e FROM Incidencias e").getResultList();
+        } finally {
+            entityManager.close();
+        }
+    }
+
+    @Override
+    public List<Incidencias> traerTodoIncidenciasEntreFechas(LocalDate fecha1, LocalDate fecha2) {
+
+        System.out.println("\nTrayendo el Incidencias desde la DB entre fechas");
+        EntityManager entityManager = dao.getEntityManager();
+        try {
+            String jpasql = "SELECT i FROM tbincidencias i WHERE i.FECHADEAPERTURA >= fecha1 AND i.FECHADECIERRE <= fecha2";
+            List<Incidencias> incidentes = entityManager.createQuery(jpasql, Incidencias.class)
+                    .setParameter("fecha1", fecha1)
+                    .setParameter("fecha2", fecha2).getResultList();
+            return incidentes;
         } finally {
             entityManager.close();
         }
