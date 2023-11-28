@@ -1,3 +1,4 @@
+org/tpi_arg_prog/MainDeCargaDeDatos.class
 org/tpi_arg_prog/entities/repository/dao/JpaDAO.class
 org/tpi_arg_prog/entities/Cliente.class
 org/tpi_arg_prog/entities/repository/JpaEspecialidadRepositorio.class
