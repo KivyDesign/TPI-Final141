@@ -1,5 +1,8 @@
 package org.tpi_arg_prog.entities.repository;
 
+//import java.time.LocalDate;
+//import java.time.ZoneId;
+import java.sql.Date;
 import java.time.LocalDate;
 import org.tpi_arg_prog.entities.Incidencias;
 import org.tpi_arg_prog.entities.repository.dao.DAO;
@@ -101,21 +104,28 @@ public class JpaIncidenciasRepositorio implements IncidenciasRepositorio {
     @Override
     public List<Incidencias> traerTodoIncidenciasEntreFechas(LocalDate fecha1, LocalDate fecha2) {
 
+        Date fecha3 = Date.valueOf(fecha1);
+        Date fecha4 = Date.valueOf(fecha2);
+        
         System.out.println("\nTrayendo el Incidencias desde la DB entre fechas");
         EntityManager entityManager = dao.getEntityManager();
         try {
-            String jpasql = "FROM tbincidencias i WHERE i.FECHADEAPERTURA >= :fecha1 AND i.FECHADECIERRE <= :fecha2"
-                    +" AND i.resuelto = :estado";
+//            String jpasql = "SELECT * FROM tbincidencias WHERE FECHADEAPERTURA >= :fecha3 AND FECHADECIERRE <= :fecha4"
+//                    +" AND resuelto = :estado";
+            String jpasql = "SELECT e FROM Incidencias e WHERE e.resuelto = 1";
             List<Incidencias> incidentes = entityManager.createQuery(jpasql, Incidencias.class)
-                    .setParameter("estado", true)
-                    .setParameter("fecha1", fecha1)
-                    .setParameter("fecha2", fecha2).getResultList();
+                    .getResultList();
             
             return incidentes;
         } finally {
             entityManager.close();
         }
     }
+//2023-11-25 	2023-11-28
+//2023-11-17 	2023-11-20
+//SELECT * FROM tbincidencias WHERE 
+    //FECHADEAPERTURA >= "2023-11-18" AND 
+    //FECHADECIERRE <= "2023-11-21" AND resuelto = 1;
     
 //        public List<Incidente> obtenerResueltosPorFecha(EEstado estado, LocalDate fecha1, LocalDate fecha2) {
 //            String jpql = "SELECT i FROM Incidente i WHERE i.fechaCreacion>= :fecha1 AND i.fechaCierre <= :fecha2"
