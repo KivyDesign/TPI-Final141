@@ -114,4 +114,23 @@ public class JpaIncidenciasRepositorio implements IncidenciasRepositorio {
             entityManager.close();
         }
     }
+    
+//        public List<Incidente> obtenerResueltosPorFecha(EEstado estado, LocalDate fecha1, LocalDate fecha2) {
+//            String jpql = "SELECT i FROM Incidente i WHERE i.fechaCreacion>= :fecha1 AND i.fechaCierre <= :fecha2"
+//                    + " AND i.estado = :estado";
+//            List<Incidente> incidentes = em.createQuery(jpql, Incidente.class)
+//                    .setParameter("estado", EEstado.RESUELTO)
+//                    .setParameter("fecha1", fecha1).setParameter("fecha2", fecha2).getResultList();
+//            return incidentes;
+//        }
+//        public Tecnico resueltosporFecha(EEstado estado, LocalDate fecha1, LocalDate fecha2) {
+//            List<Incidente> incidentes = repository.obtenerResueltosPorFecha(estado, fecha1, fecha2);
+//            Map<Tecnico, Long> resueltos = incidentes.stream().collect(Collectors.groupingBy(Incidente::getTecnico, Collectors.counting()));
+//            Tecnico tecnicoConMasIncidentes = resueltos.entrySet().stream()
+//                    .max(Map.Entry.comparingByValue()).map(Map.Entry::getKey).orElse(null);
+//            return tecnicoConMasIncidentes;
+//        }
+//        public List<ReporteIncidencia> listarPorRangoFecha(LocalDate fechaDesde, LocalDate fechaHasta) {
+//        EstadoProblema estadoProblema = EstadoProblema.Resuelto;
+//        return em.createQuery("from ReporteIncidencia r where r.estadoProblema = :estadoProblema and r.fechaAlta between :fechaDesde and :fechaHasta", ReporteIncidencia.class).setParameter("estadoProblema", estadoProblema).setParameter("fechaDesde", fechaDesde).setParameter("fechaHasta", fechaHasta).getResultList();
 }

@@ -2,6 +2,8 @@ package org.tpi_arg_prog;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 import org.tpi_arg_prog.entities.repository.dao.DAO;
 import org.tpi_arg_prog.entities.repository.dao.JpaDAO;
 
@@ -37,6 +39,12 @@ public class Main {
     static HelpDeskServicio helpDeskServicio;
 
     public static void main(String[] args) {
+        DAO dao = new JpaDAO();
+
+        // Incidencias
+        IncidenciasRepositorio incidenciasRepositorio = new JpaIncidenciasRepositorio(dao);
+        incidenciasServicio = new IncidenciasServicio(incidenciasRepositorio);
+
         /*
          * Entrega 2
          * 
@@ -58,10 +66,6 @@ public class Main {
          *       determinada especialidad en los últimos N días
          *    c. Quién fue el técnico que más rápido resolvió los incidentes
          */
-
-        DAO dao = new JpaDAO();
-        IncidenciasRepositorio incidenciasRepositorio = new JpaIncidenciasRepositorio(dao);
-        incidenciasServicio = new IncidenciasServicio(incidenciasRepositorio);
         List<Incidencias> incidentesResueltos = incidenciasServicio.traerTodoIncidenciasEntreFechas(LocalDate.parse("2023-10-04"), LocalDate.parse("2023-11-03"));
         if (incidentesResueltos != null) {
             for (Incidencias nuevoIncidencias : incidentesResueltos) {
@@ -79,13 +83,5 @@ public class Main {
             }
 
         }
-        
-//        public List<ReporteIncidencia> listarPorRangoFecha(LocalDate fechaDesde, LocalDate fechaHasta) {
-
-//        EstadoProblema estadoProblema = EstadoProblema.Resuelto;
-
-//        return em.createQuery("from ReporteIncidencia r where r.estadoProblema = :estadoProblema and r.fechaAlta between :fechaDesde and :fechaHasta", ReporteIncidencia.class).setParameter("estadoProblema", estadoProblema).setParameter("fechaDesde", fechaDesde).setParameter("fechaHasta", fechaHasta).getResultList();
-
     }
-    }
-    
+}
