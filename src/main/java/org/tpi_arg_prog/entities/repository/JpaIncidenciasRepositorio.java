@@ -110,6 +110,7 @@ public class JpaIncidenciasRepositorio implements IncidenciasRepositorio {
                     .setParameter("estado", true)
                     .setParameter("fecha1", fecha1)
                     .setParameter("fecha2", fecha2).getResultList();
+            
             return incidentes;
         } finally {
             entityManager.close();

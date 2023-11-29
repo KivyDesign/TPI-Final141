@@ -66,7 +66,11 @@ public class Main {
          *       determinada especialidad en los últimos N días
          *    c. Quién fue el técnico que más rápido resolvió los incidentes
          */
-        List<Incidencias> incidentesResueltos = incidenciasServicio.traerTodoIncidenciasEntreFechas(LocalDate.parse("2023-10-04"), LocalDate.parse("2023-11-03"));
+        List<Incidencias> incidentesResueltos = incidenciasServicio.traerTodoIncidenciasEntreFechas(
+                LocalDate.parse("2023-10-04"),
+                LocalDate.parse("2023-11-03")
+        ); 
+        //SELECT * FROM tbincidencias WHERE FECHADEAPERTURA >= "2023-10-04" AND FECHADECIERRE <= "2023-11-03" AND resuelto = 1;
         if (incidentesResueltos != null) {
             for (Incidencias nuevoIncidencias : incidentesResueltos) {
                 System.out.println(
