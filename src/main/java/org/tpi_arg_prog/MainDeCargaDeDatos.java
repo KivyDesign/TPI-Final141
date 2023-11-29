@@ -63,9 +63,9 @@ public class MainDeCargaDeDatos {
 
         // Long id, Incidencias incidencias, Cliente cliente, Tecnico tecnico,
         // LocalDate tiempoEstipuladoParaResolucion, LocalDate tiempoExtraParaResolucion
-        HelpDesk helpDesk1 = crearHelpDesk(1L, incidencias1, cliente1, tecnico1, hoy, hoy);
+        HelpDesk helpDesk1 = crearHelpDesk(1L, incidencias1, cliente1, tecnico1, LocalDate.parse("2023-11-01"), LocalDate.parse("2023-11-02"));
         helpDeskServicio.agregarHelpDesk(helpDesk1);
-        HelpDesk helpDesk2 = crearHelpDesk(2L, incidencias2, cliente2, tecnico2, hoy, hoy);
+        HelpDesk helpDesk2 = crearHelpDesk(2L, incidencias2, cliente2, tecnico2, LocalDate.parse("2023-11-01"), LocalDate.parse("2023-11-02"));
         helpDeskServicio.agregarHelpDesk(helpDesk2);
 
         // Probando metodo traerPorId(id)
@@ -160,13 +160,13 @@ public class MainDeCargaDeDatos {
         LocalDate hoy = LocalDate.now();
         Incidencias incidencias1 = crearIncidencias(
                 1L, "Yerba Mate",
-                "¡Se acabo la Yerba pal mate!. ¿Alguien que baje y compre?", hoy, hoy, 1L, 1L
+                "¡Se acabo la Yerba pal mate!. ¿Alguien que baje y compre?", hoy, hoy, 1L, 1L,true
         );
         incidenciasServicio.agregarIncidencias(incidencias1);
-        
+
         Incidencias incidencias2 = crearIncidencias(
                 2L, "Azucar pal Mate",
-                "¡Se acabo el Azucar pal mate!. ¿Alguien que baje y compre?", hoy, hoy, 1L, 1L
+                "¡Se acabo el Azucar pal mate!. ¿Alguien que baje y compre?", hoy, hoy, 1L, 1L,true
         );
         incidenciasServicio.agregarIncidencias(incidencias2);
 
@@ -288,7 +288,7 @@ public class MainDeCargaDeDatos {
         return cliente;
     }
 
-    private static Incidencias crearIncidencias(Long id, String tipo, String descripcion, LocalDate fechaDeApertura, LocalDate fechaDeCierre, Long tecnico, Long cliente) {
+    private static Incidencias crearIncidencias(Long id, String tipo, String descripcion, LocalDate fechaDeApertura, LocalDate fechaDeCierre, Long tecnico, Long cliente,boolean estado) {
         // Long id, String tipo, String descripcion, LocalDate fechaDeApertura,
         // LocalDate fechaDeCierre,Long tecnico, Long cliente
         Tecnico nuevoTecnico = tecnicoService.traerPorId(tecnico);
@@ -301,6 +301,8 @@ public class MainDeCargaDeDatos {
         incidencias.setDescripcion(descripcion);
         incidencias.setFechaDeApertura(fechaDeApertura);
         incidencias.setFechaDeCierre(fechaDeCierre);
+        incidencias.setResuelto(estado);
+        
         return incidencias;
     }
 

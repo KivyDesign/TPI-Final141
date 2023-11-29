@@ -17,6 +17,7 @@ public class Incidencias {
     private String descripcion;
     private LocalDate fechaDeApertura;
     private LocalDate fechaDeCierre;
+    private boolean resuelto;
 
     @ManyToOne
     @JoinColumn(name = "idTecnico", referencedColumnName = "id")

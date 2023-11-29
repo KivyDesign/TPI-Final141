@@ -58,6 +58,26 @@ public class Main {
          *       determinada especialidad en los últimos N días
          *    c. Quién fue el técnico que más rápido resolvió los incidentes
          */
-        
+
+        DAO dao = new JpaDAO();
+        IncidenciasRepositorio incidenciasRepositorio = new JpaIncidenciasRepositorio(dao);
+        incidenciasServicio = new IncidenciasServicio(incidenciasRepositorio);
+        List<Incidencias> incidentesResueltos = incidenciasServicio.traerTodoIncidenciasEntreFechas(LocalDate.parse("2023-10-04"), LocalDate.parse("2023-11-03"));
+        if (incidentesResueltos != null) {
+            for (Incidencias nuevoIncidencias : incidentesResueltos) {
+                System.out.println(
+                        "\nResueltos: "
+                        + "\n==========================="
+                        + "\nid: " + nuevoIncidencias.getId()
+                        + "\nTécnico: " + nuevoIncidencias.getTecnico()
+                        + "\nCliente: " + nuevoIncidencias.getCliente()
+                        + "\nTipo: " + nuevoIncidencias.getTipo()
+                        + "\nDescripcion: " + nuevoIncidencias.getDescripcion()
+                        + "\nApertura: " + nuevoIncidencias.getFechaDeApertura()
+                        + "\nCierre: " + nuevoIncidencias.getFechaDeCierre()
+                );
+            }
+
+        }
     }
 }

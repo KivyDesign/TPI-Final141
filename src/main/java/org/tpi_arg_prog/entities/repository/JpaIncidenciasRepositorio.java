@@ -104,8 +104,9 @@ public class JpaIncidenciasRepositorio implements IncidenciasRepositorio {
         System.out.println("\nTrayendo el Incidencias desde la DB entre fechas");
         EntityManager entityManager = dao.getEntityManager();
         try {
-            String jpasql = "SELECT i FROM tbincidencias i WHERE i.FECHADEAPERTURA >= fecha1 AND i.FECHADECIERRE <= fecha2";
+            String jpasql = "FROM tbincidencias i WHERE i.resuelto = :estado AND i.FECHADEAPERTURA >= :fecha1 AND i.FECHADECIERRE <= :fecha2";
             List<Incidencias> incidentes = entityManager.createQuery(jpasql, Incidencias.class)
+                    .setParameter("estado", 1)
                     .setParameter("fecha1", fecha1)
                     .setParameter("fecha2", fecha2).getResultList();
             return incidentes;
