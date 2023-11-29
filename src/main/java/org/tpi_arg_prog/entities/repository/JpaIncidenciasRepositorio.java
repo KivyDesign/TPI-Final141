@@ -10,6 +10,7 @@ import org.tpi_arg_prog.entities.repository.dao.DAO;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 import java.util.List;
+import javax.persistence.TemporalType;
 
 public class JpaIncidenciasRepositorio implements IncidenciasRepositorio {
 
@@ -112,8 +113,10 @@ public class JpaIncidenciasRepositorio implements IncidenciasRepositorio {
         try {
 //            String jpasql = "SELECT * FROM tbincidencias WHERE FECHADEAPERTURA >= :fecha3 AND FECHADECIERRE <= :fecha4"
 //                    +" AND resuelto = :estado";
-            String jpasql = "SELECT e FROM Incidencias e WHERE e.resuelto = 1";
+            String jpasql = "SELECT e FROM Incidencias e WHERE e.fechaDeApertura >= :fecha1 AND e.fechaDeCierre <= :fecha2 AND e.resuelto = 1";
             List<Incidencias> incidentes = entityManager.createQuery(jpasql, Incidencias.class)
+                    .setParameter("fecha1", fecha1)
+                    .setParameter("fecha2", fecha2)
                     .getResultList();
             
             return incidentes;
