@@ -79,5 +79,13 @@ public class Main {
             }
 
         }
+        
+//        public List<ReporteIncidencia> listarPorRangoFecha(LocalDate fechaDesde, LocalDate fechaHasta) {
+
+//        EstadoProblema estadoProblema = EstadoProblema.Resuelto;
+
+//        return em.createQuery("from ReporteIncidencia r where r.estadoProblema = :estadoProblema and r.fechaAlta between :fechaDesde and :fechaHasta", ReporteIncidencia.class).setParameter("estadoProblema", estadoProblema).setParameter("fechaDesde", fechaDesde).setParameter("fechaHasta", fechaHasta).getResultList();
+
+    }
     }
 }
