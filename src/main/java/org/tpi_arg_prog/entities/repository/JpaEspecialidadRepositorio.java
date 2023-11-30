@@ -2,6 +2,8 @@ package org.tpi_arg_prog.entities.repository;
 
 import org.tpi_arg_prog.entities.Especialidad;
 import org.tpi_arg_prog.entities.repository.dao.DAO;
+import javax.persistence.EntityManager;
+import javax.persistence.EntityTransaction;
 
 import java.util.List;
 
@@ -29,7 +31,7 @@ public class JpaEspecialidadRepositorio implements EspecialidadRepositorio {
     }
 
     @Override
-    public void eliminarTecnica(Long id) {
+    public void eliminarTecnica(Especialidad especialidad) {
 
     }
 
