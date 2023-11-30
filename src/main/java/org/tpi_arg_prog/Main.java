@@ -115,14 +115,14 @@ public class Main {
         // Consulto todas las incidencias resueltas en un determiando periodo
         // de comprendido entre N días
         int ndias = 180;
-        List<Incidencias> ir = incidenciasServicio.traerTodoIncidenciasEntreNDias(ndias);
+        List<Incidencias> incidenciasResueltasNDias = incidenciasServicio.traerTodoIncidenciasEntreNDias(ndias);
 
         System.out.println("\n\n" + "=".repeat(60));
 
         // Filtro la lista para encontrar el Técnico con más incidencias
         // resueltas e imprimo su nombre, apellido y el total de incidencias
         // que resolvió
-        Map<Tecnico, Long> resueltos = ir
+        Map<Tecnico, Long> resueltos = incidenciasResueltasNDias
                 .stream()
                 .collect(
                         Collectors.groupingBy(Incidencias::getTecnico, Collectors.counting()
@@ -145,6 +145,14 @@ public class Main {
 
         System.out.println("=".repeat(60) + "\n\n");
 
+        ////////////////////////////////////////////////////////////////////////
+        //            Aquí se esta poniendo intenso el asunto che             //
+        ////////////////////////////////////////////////////////////////////////
+        //
+        // Filtro la lista para encontrar el Técnico con más incidencias
+        // resueltas e imprimo su nombre, apellido y el total de incidencias
+        // que logro realizar de una determinada especialidad
+        //
 //        System.out.println("Metodo 2");
 //        System.out.println("técnico con más incidentes resueltos por especialidad - sin probar por falta de datos");
 //        Optional<Map.Entry<Tecnico, Long>> resultado2 = service.tecnicoConMaximaCantidadDeIncidentesEnEspecialidad(null, 100);
