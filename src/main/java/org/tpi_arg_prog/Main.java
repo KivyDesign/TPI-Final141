@@ -120,7 +120,7 @@ public class Main {
                             Collectors.groupingBy(Incidencias::getTecnico, Collectors.counting()
                             )
                     );
-            Tecnico tecnicoConMasIncidentes = resueltos
+            Tecnico tecnicoConMasIncidentesResueltos = resueltos
                     .entrySet()
                     .stream()
                     .max(
@@ -130,8 +130,8 @@ public class Main {
                     .orElse(null);
             
             System.out.println("\n\nTécnico con más Incidentes Resueltos: " 
-                    + tecnicoConMasIncidentes.getNombre() + " "
-                    + tecnicoConMasIncidentes.getApellido()
+                    + tecnicoConMasIncidentesResueltos.getNombre() + " "
+                    + tecnicoConMasIncidentesResueltos.getApellido()
                     + "\n\n"
             );
         
