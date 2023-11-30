@@ -113,10 +113,15 @@ public class Main {
          *    c. Quién fue el técnico que más rápido resolvió los incidentes
          */
         
-        List<Incidencias> ir = incidenciasServicio.traerTodoIncidenciasEntreNDias(180);
+        // Consulto todas las incidencias resueltas en un determiando periodo
+        // de comprendido entre N días
+        int ndias = 180;
+        List<Incidencias> ir = incidenciasServicio.traerTodoIncidenciasEntreNDias(ndias);
         
         System.out.println("\n\n" + "=".repeat(60));
         
+        // Filtro la lista para encontrar el Técnico con más incidencias
+        // resueltas e imprimo su nombre y apellido
         Map<Tecnico, Long> resueltos = ir
                     .stream()
                     .collect(
@@ -132,10 +137,9 @@ public class Main {
                     .map(Map.Entry::getKey)
                     .orElse(null);
             
-            System.out.println("\n\nTécnico con más Incidentes Resueltos: " 
+            System.out.println("\n\nTécnico con más Incidentes Resueltos en los últimos " + ndias + " días: " 
                     + tecnicoConMasIncidentesResueltos.getNombre() + " "
-                    + tecnicoConMasIncidentesResueltos.getApellido()
-                    + "\n\n"
+                    + tecnicoConMasIncidentesResueltos.getApellido() + "\n\n"
             );
         
         System.out.println("=".repeat(60) + "\n\n");
