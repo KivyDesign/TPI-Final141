@@ -157,16 +157,23 @@ public class MainDeCargaDeDatos {
 
         // Long id, String tipo, String descripcion, LocalDate fechaDeApertura,
         // LocalDate fechaDeCierre,Long tecnico, long cliente
-        LocalDate hoy = LocalDate.now();
+        //2023-11-25 	2023-11-28
+        //2023-11-17 	2023-11-20
+        LocalDate apertura = LocalDate.parse("2023-11-25");
+        LocalDate cierre = LocalDate.parse("2023-11-28");
+       
         Incidencias incidencias1 = crearIncidencias(
                 1L, "Yerba Mate",
-                "¡Se acabo la Yerba pal mate!. ¿Alguien que baje y compre?", hoy, hoy, 1L, 1L,true
+                "¡Se acabo la Yerba pal mate!. ¿Alguien que baje y compre?", apertura, cierre, 1L, 1L,true
         );
         incidenciasServicio.agregarIncidencias(incidencias1);
 
+        apertura = LocalDate.parse("2023-11-17");
+        cierre = LocalDate.parse("2023-11-20");
+        
         Incidencias incidencias2 = crearIncidencias(
                 2L, "Azucar pal Mate",
-                "¡Se acabo el Azucar pal mate!. ¿Alguien que baje y compre?", hoy, hoy, 1L, 1L,true
+                "¡Se acabo el Azucar pal mate!. ¿Alguien que baje y compre?", apertura, cierre, 1L, 1L,true
         );
         incidenciasServicio.agregarIncidencias(incidencias2);
 
