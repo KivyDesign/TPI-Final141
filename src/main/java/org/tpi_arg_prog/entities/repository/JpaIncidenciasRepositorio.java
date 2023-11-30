@@ -12,6 +12,9 @@ import javax.persistence.EntityTransaction;
 import java.util.List;
 import javax.persistence.TemporalType;
 
+import org.tpi_arg_prog.entities.Tecnico;
+
+
 public class JpaIncidenciasRepositorio implements IncidenciasRepositorio {
 
     private DAO dao;
@@ -128,7 +131,7 @@ public class JpaIncidenciasRepositorio implements IncidenciasRepositorio {
         LocalDate fecha2 = LocalDate.now();
         LocalDate fecha1 = fecha2.minusDays(ndias);
         
-        System.out.println("\nTrayendo el Incidencias desde la DB entre N días " + ndias);
+        System.out.println("\nTrayendo las Incidencias desde la DB entre N días " + ndias);
         EntityManager entityManager = dao.getEntityManager();
         try {
             //String jpasql = "SELECT MAX(e.resuelto) e FROM Incidencias e COUNT(e.resuelto) WHERE e.fechaDeApertura >= :fecha1 "
@@ -140,6 +143,11 @@ public class JpaIncidenciasRepositorio implements IncidenciasRepositorio {
                     .setParameter("fecha1", fecha1)
                     .setParameter("fecha2", fecha2)
                     .getResultList();
+            
+            Map<Tecnico, Long> resueltos = incidentes.stream().collect(Collectors.groupingBy(Incidente::getTecnico, Collectors.counting()));
+            Tecnico tecnicoConMasIncidentes = resueltos.entrySet().stream()
+                    .max(Map.Entry.comparingByValue()).map(Map.Entry::getKey).orElse(null);
+            
             return incidentes;
         } finally {
             entityManager.close();
@@ -153,7 +161,4 @@ public class JpaIncidenciasRepositorio implements IncidenciasRepositorio {
 //                    .max(Map.Entry.comparingByValue()).map(Map.Entry::getKey).orElse(null);
 //            return tecnicoConMasIncidentes;
 //        }
-//        public List<ReporteIncidencia> listarPorRangoFecha(LocalDate fechaDesde, LocalDate fechaHasta) {
-//        EstadoProblema estadoProblema = EstadoProblema.Resuelto;
-//        return em.createQuery("from ReporteIncidencia r where r.estadoProblema = :estadoProblema and r.fechaAlta between :fechaDesde and :fechaHasta", ReporteIncidencia.class).setParameter("estadoProblema", estadoProblema).setParameter("fechaDesde", fechaDesde).setParameter("fechaHasta", fechaHasta).getResultList();
 }
