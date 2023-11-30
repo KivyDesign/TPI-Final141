@@ -93,7 +93,7 @@ public class Main {
         //
         // Consulta de prueba entre fechas
         // Consultamos entre una fecha de apertura y otra fecha de cierre
-        List<Incidencias> ir = incidenciasServicio.traerTodoIncidenciasEntreNDias(90); 
+        List<Incidencias> ir = incidenciasServicio.traerTodoIncidenciasEntreNDias(180); 
         //2023-11-25 	2023-11-28
         //2023-11-17 	2023-11-20
         if (ir != null) {
@@ -105,11 +105,36 @@ public class Main {
                         + "\nTécnico: " + nuevoIncidencias.getTecnico().getNombre() + ", " + nuevoIncidencias.getTecnico().getApellido()
                         + "\nCliente: " + nuevoIncidencias.getCliente().getNombre() + ", " + nuevoIncidencias.getCliente().getApellido() + " de la empresa " + nuevoIncidencias.getCliente().getDireccion()
                         + "\nTipo de Incidencia: " + nuevoIncidencias.getTipo()
-                        + "\nDescripcion de la Incidencia: " + nuevoIncidencias.getDescripcion()
+                        + "\nDescripción de la Incidencia: " + nuevoIncidencias.getDescripcion()
                         + "\nFecha de Apertura: " + nuevoIncidencias.getFechaDeApertura()
                         + "\nFecha de Cierre: " + nuevoIncidencias.getFechaDeCierre()
                 );
             }
         }
+        
+        System.out.println("\n\n" + "=".repeat(60));
+        
+        Map<Tecnico, Long> resueltos = ir
+                    .stream()
+                    .collect(
+                            Collectors.groupingBy(Incidencias::getTecnico, Collectors.counting()
+                            )
+                    );
+            Tecnico tecnicoConMasIncidentes = resueltos
+                    .entrySet()
+                    .stream()
+                    .max(
+                            Map.Entry.comparingByValue()
+                    )
+                    .map(Map.Entry::getKey)
+                    .orElse(null);
+            
+            System.out.println("\n\nTécnico con más Incidentes Resueltos: " 
+                    + tecnicoConMasIncidentes.getNombre() + " "
+                    + tecnicoConMasIncidentes.getApellido()
+                    + "\n\n"
+            );
+        
+        System.out.println("=".repeat(60) + "\n\n");
     }
 }

@@ -142,23 +142,11 @@ public class JpaIncidenciasRepositorio implements IncidenciasRepositorio {
             //String jpasql = "SELECT MAX(e.resuelto) e FROM Incidencias e COUNT(e.resuelto) WHERE e.fechaDeApertura >= :fecha1 "
             String jpasql = "SELECT e FROM Incidencias e WHERE e.fechaDeApertura >= :fecha1 "
                     + "AND e.fechaDeCierre <= :fecha2 "
-                    + "AND e.resuelto"
                     + "AND e.resuelto = 1";
             List<Incidencias> incidentes = entityManager.createQuery(jpasql, Incidencias.class)
                     .setParameter("fecha1", fecha1)
                     .setParameter("fecha2", fecha2)
                     .getResultList();
-            
-            Map<Tecnico, Long> resueltos = incidentes.stream().collect(Collectors.groupingBy(Incidencias::getTecnico, Collectors.counting()));
-            Tecnico tecnicoConMasIncidentes = resueltos.entrySet().stream()
-                    .max(Map.Entry.comparingByValue()).map(Map.Entry::getKey).orElse(null);
-            
-            System.out.println("\n\nTécnico con más Incidentes Resueltos: " 
-                    + tecnicoConMasIncidentes
-                    + "\n\n"
-            );
-            
-            
             return incidentes;
         } finally {
             entityManager.close();
