@@ -153,6 +153,29 @@ public class Main {
         // resueltas e imprimo su nombre, apellido y el total de incidencias
         // que logro realizar de una determinada especialidad
         //
+        Map<Tecnico, Long> resueltosEspecialidades = incidenciasResueltasNDias
+                .stream()
+                .collect(
+                        Collectors.groupingBy(Incidencias::getTecnico, Collectors.counting()
+                        )
+                );
+        Tecnico tecnicoConMasIncidentesResueltosEspecialidades = resueltosEspecialidades
+                .entrySet()
+                .stream()
+                .max(
+                        Map.Entry.comparingByValue()
+                )
+                .map(Map.Entry::getKey)
+                .orElse(null);
+
+        System.out.println("\n\nTécnico con más Incidentes Resueltos en los últimos " + ndias + " días: "
+                + tecnicoConMasIncidentesResueltosEspecialidades.getNombre() + " "
+                + tecnicoConMasIncidentesResueltosEspecialidades.getApellido()
+                + "\nTotal de incidentes resueltos: " + tecnicoConMasIncidentesResueltosEspecialidades.getIncidenciasResueltas() + "\n\n"
+        );
+
+        System.out.println("=".repeat(60) + "\n\n");
+        
 //        System.out.println("Metodo 2");
 //        System.out.println("técnico con más incidentes resueltos por especialidad - sin probar por falta de datos");
 //        Optional<Map.Entry<Tecnico, Long>> resultado2 = service.tecnicoConMaximaCantidadDeIncidentesEnEspecialidad(null, 100);
