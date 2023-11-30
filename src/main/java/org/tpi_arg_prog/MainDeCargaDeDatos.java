@@ -27,6 +27,7 @@ import org.tpi_arg_prog.entities.repository.JpaIncidenciasRepositorio;
 import org.tpi_arg_prog.services.ClienteService;
 import org.tpi_arg_prog.services.HelpDeskServicio;
 import org.tpi_arg_prog.services.IncidenciasServicio;
+import org.tpi_arg_prog.services.EspecialidadServicio;
 
 public class MainDeCargaDeDatos {
 
@@ -35,6 +36,7 @@ public class MainDeCargaDeDatos {
     static IncidenciasServicio incidenciasServicio;
     static ClienteService clienteService;
     static HelpDeskServicio helpDeskServicio;
+    static EspecialidadServicio especialidadServicio;
 
     public static void main(String[] args) {
         iniciarTecnico();
@@ -164,7 +166,7 @@ public class MainDeCargaDeDatos {
        
         Incidencias incidencias1 = crearIncidencias(
                 1L, "Yerba Mate",
-                "¡Se acabo la Yerba pal mate!. ¿Alguien que baje y compre?", apertura, cierre, 1L, 1L,true
+                "¡Se acabo la Yerba pal mate!. ¿Alguien que baje y compre?", apertura, cierre, 1L, 1L,true,4L
         );
         incidenciasServicio.agregarIncidencias(incidencias1);
 
@@ -173,7 +175,7 @@ public class MainDeCargaDeDatos {
         
         Incidencias incidencias2 = crearIncidencias(
                 2L, "Azucar pal Mate",
-                "¡Se acabo el Azucar pal mate!. ¿Alguien que baje y compre?", apertura, cierre, 2L, 1L,true
+                "¡Se acabo el Azucar pal mate!. ¿Alguien que baje y compre?", apertura, cierre, 2L, 1L,true,4L
         );
         incidenciasServicio.agregarIncidencias(incidencias2);
         
@@ -182,7 +184,7 @@ public class MainDeCargaDeDatos {
         
         Incidencias incidencias3 = crearIncidencias(
                 3L, "Café para la tarde",
-                "¡Se acabo el Café!. ¿Alguien que baje y compre?", apertura, cierre, 2L, 1L,true
+                "¡Se acabo el Café!. ¿Alguien que baje y compre?", apertura, cierre, 2L, 1L,true,4L
         );
         incidenciasServicio.agregarIncidencias(incidencias3);
 
@@ -304,11 +306,12 @@ public class MainDeCargaDeDatos {
         return cliente;
     }
 
-    private static Incidencias crearIncidencias(Long id, String tipo, String descripcion, LocalDate fechaDeApertura, LocalDate fechaDeCierre, Long tecnico, Long cliente,boolean estado) {
+    private static Incidencias crearIncidencias(Long id, String tipo, String descripcion, LocalDate fechaDeApertura, LocalDate fechaDeCierre, Long tecnico, Long cliente,boolean estado,Long especialidad) {
         // Long id, String tipo, String descripcion, LocalDate fechaDeApertura,
         // LocalDate fechaDeCierre,Long tecnico, Long cliente
         Tecnico nuevoTecnico = tecnicoService.traerPorId(tecnico);
         Cliente nuevoCliente = clienteService.traerPorId(cliente);
+        Especialidad nuevaEspecialidad= especialidadServicio.traerPorId(especialidad);
         Incidencias incidencias = new Incidencias();
         incidencias.setId(id);
         incidencias.setTecnico(nuevoTecnico);
@@ -318,6 +321,7 @@ public class MainDeCargaDeDatos {
         incidencias.setFechaDeApertura(fechaDeApertura);
         incidencias.setFechaDeCierre(fechaDeCierre);
         incidencias.setResuelto(estado);
+        incidencias.setEspecialidad(nuevaEspecialidad);
         
         return incidencias;
     }

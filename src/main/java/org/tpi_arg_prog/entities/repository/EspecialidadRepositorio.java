@@ -12,7 +12,7 @@ public interface EspecialidadRepositorio {
 
     Especialidad traerPorId(Long id);
 
-    void eliminarTecnica(Long id);
+    void eliminarTecnica(Especialidad especialidad);
 
     List<Especialidad> traerTodosEspecialidads();
 

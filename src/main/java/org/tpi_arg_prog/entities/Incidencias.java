@@ -25,4 +25,7 @@ public class Incidencias {
     @ManyToOne
     @JoinColumn(name = "idCliente", referencedColumnName = "id")
     private Cliente cliente;
+    @OneToOne
+    @JoinColumn(name = "idEspecialidad", referencedColumnName = "id")
+    private Especialidad especialidad;
 }
