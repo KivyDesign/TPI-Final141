@@ -18,6 +18,7 @@ public class Incidencias {
     private LocalDate fechaDeApertura;
     private LocalDate fechaDeCierre;
     private boolean resuelto;
+    private Long special;
 
     @ManyToOne
     @JoinColumn(name = "idTecnico", referencedColumnName = "id")
@@ -25,7 +26,7 @@ public class Incidencias {
     @ManyToOne
     @JoinColumn(name = "idCliente", referencedColumnName = "id")
     private Cliente cliente;
-    @OneToOne
-    @JoinColumn(name = "idEspecialidad", referencedColumnName = "id")
-    private Especialidad especialidad;
+//    @OneToOne
+//    @JoinColumn(name = "idEspecialidad", referencedColumnName = "id")
+//    private Especialidad especialidad;
 }
