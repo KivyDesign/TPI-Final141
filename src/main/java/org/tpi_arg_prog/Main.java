@@ -3,6 +3,7 @@ package org.tpi_arg_prog;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import java.util.stream.Collectors;
 import org.tpi_arg_prog.entities.repository.dao.DAO;
 import org.tpi_arg_prog.entities.repository.dao.JpaDAO;
@@ -90,7 +91,6 @@ public class Main {
 //                );
 //            }
 //        }
-        
         /*
          * Entrega 2
          * 
@@ -112,36 +112,48 @@ public class Main {
          *       determinada especialidad en los últimos N días
          *    c. Quién fue el técnico que más rápido resolvió los incidentes
          */
-        
         // Consulto todas las incidencias resueltas en un determiando periodo
         // de comprendido entre N días
         int ndias = 180;
         List<Incidencias> ir = incidenciasServicio.traerTodoIncidenciasEntreNDias(ndias);
-        
+
         System.out.println("\n\n" + "=".repeat(60));
-        
+
         // Filtro la lista para encontrar el Técnico con más incidencias
-        // resueltas e imprimo su nombre y apellido
+        // resueltas e imprimo su nombre, apellido y el total de incidencias
+        // que resolvió
         Map<Tecnico, Long> resueltos = ir
-                    .stream()
-                    .collect(
-                            Collectors.groupingBy(Incidencias::getTecnico, Collectors.counting()
-                            )
-                    );
-            Tecnico tecnicoConMasIncidentesResueltos = resueltos
-                    .entrySet()
-                    .stream()
-                    .max(
-                            Map.Entry.comparingByValue()
-                    )
-                    .map(Map.Entry::getKey)
-                    .orElse(null);
-            
-            System.out.println("\n\nTécnico con más Incidentes Resueltos en los últimos " + ndias + " días: " 
-                    + tecnicoConMasIncidentesResueltos.getNombre() + " "
-                    + tecnicoConMasIncidentesResueltos.getApellido() + "\n\n"
-            );
-        
+                .stream()
+                .collect(
+                        Collectors.groupingBy(Incidencias::getTecnico, Collectors.counting()
+                        )
+                );
+        Tecnico tecnicoConMasIncidentesResueltos = resueltos
+                .entrySet()
+                .stream()
+                .max(
+                        Map.Entry.comparingByValue()
+                )
+                .map(Map.Entry::getKey)
+                .orElse(null);
+
+        System.out.println("\n\nTécnico con más Incidentes Resueltos en los últimos " + ndias + " días: "
+                + tecnicoConMasIncidentesResueltos.getNombre() + " "
+                + tecnicoConMasIncidentesResueltos.getApellido()
+                + "\nTotal de incidentes resueltos: " + tecnicoConMasIncidentesResueltos.getIncidenciasResueltas() + "\n\n"
+        );
+
         System.out.println("=".repeat(60) + "\n\n");
+
+//        System.out.println("Metodo 2");
+//        System.out.println("técnico con más incidentes resueltos por especialidad - sin probar por falta de datos");
+//        Optional<Map.Entry<Tecnico, Long>> resultado2 = service.tecnicoConMaximaCantidadDeIncidentesEnEspecialidad(null, 100);
+//        resultado2.ifPresent(entry -> {
+//            Tecnico tecnicoConMasIncidentes = entry.getKey();
+//            Long cantidadIncidentes = entry.getValue();
+//
+//            System.out.println("Técnico con más incidentes: " + tecnicoConMasIncidentes.getNombre() + " " + tecnicoConMasIncidentes.getApellido());
+//            System.out.println("Cantidad de incidentes: " + cantidadIncidentes);
+//        });
     }
 }
