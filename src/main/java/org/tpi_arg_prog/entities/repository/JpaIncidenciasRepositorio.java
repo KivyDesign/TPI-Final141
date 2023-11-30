@@ -13,7 +13,12 @@ import java.util.List;
 import javax.persistence.TemporalType;
 
 import org.tpi_arg_prog.entities.Tecnico;
-
+import java.util.Map;
+import java.util.Optional;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 public class JpaIncidenciasRepositorio implements IncidenciasRepositorio {
 
@@ -144,9 +149,15 @@ public class JpaIncidenciasRepositorio implements IncidenciasRepositorio {
                     .setParameter("fecha2", fecha2)
                     .getResultList();
             
-            Map<Tecnico, Long> resueltos = incidentes.stream().collect(Collectors.groupingBy(Incidente::getTecnico, Collectors.counting()));
+            Map<Tecnico, Long> resueltos = incidentes.stream().collect(Collectors.groupingBy(Incidencias::getTecnico, Collectors.counting()));
             Tecnico tecnicoConMasIncidentes = resueltos.entrySet().stream()
                     .max(Map.Entry.comparingByValue()).map(Map.Entry::getKey).orElse(null);
+            
+            System.out.println("\n\nTécnico con más Incidentes Resueltos: " 
+                    + tecnicoConMasIncidentes
+                    + "\n\n"
+            );
+            
             
             return incidentes;
         } finally {
