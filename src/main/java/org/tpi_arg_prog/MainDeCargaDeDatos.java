@@ -173,9 +173,18 @@ public class MainDeCargaDeDatos {
         
         Incidencias incidencias2 = crearIncidencias(
                 2L, "Azucar pal Mate",
-                "¡Se acabo el Azucar pal mate!. ¿Alguien que baje y compre?", apertura, cierre, 1L, 1L,true
+                "¡Se acabo el Azucar pal mate!. ¿Alguien que baje y compre?", apertura, cierre, 2L, 1L,true
         );
         incidenciasServicio.agregarIncidencias(incidencias2);
+        
+        apertura = LocalDate.parse("2023-11-19");
+        cierre = LocalDate.parse("2023-11-21");
+        
+        Incidencias incidencias3 = crearIncidencias(
+                3L, "Cafe para la tarde",
+                "¡Se acabo el Cafe!. ¿Alguien que baje y compre?", apertura, cierre, 2L, 1L,true
+        );
+        incidenciasServicio.agregarIncidencias(incidencias3);
 
         // Probando metodo traerPorId(id)
         Incidencias nuevoIncidencias = incidenciasServicio.traerPorId(1L);
