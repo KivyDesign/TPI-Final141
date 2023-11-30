@@ -239,11 +239,11 @@ public class MainDeCargaDeDatos {
         tecnicoService = new TecnicoService(tecnicoRepositorio);
 
         // Long id, String nombre, String apellido, int resolucion, especialidades
-        Tecnico tecnico1 = crearTecnico(1L, "Gustavo", "Torres", 2, 45, 19);
+        Tecnico tecnico1 = crearTecnico(1L, "Gustavo", "Torres", 2, 45, 1);
         tecnicoService.agregarTecnico(tecnico1);
-        Tecnico tecnico2 = crearTecnico(2L, "German", "Salvatierra", 4, 34, 22);
+        Tecnico tecnico2 = crearTecnico(2L, "German", "Salvatierra", 4, 34, 2);
         tecnicoService.agregarTecnico(tecnico2);
-        Tecnico tecnico3 = crearTecnico(3L, "Guido", "Sosa", 45, 34, 20);
+        Tecnico tecnico3 = crearTecnico(3L, "Guido", "Sosa", 45, 34, 0);
         tecnicoService.agregarTecnico(tecnico3);
 
         // Probando metodo traerPorId(id)

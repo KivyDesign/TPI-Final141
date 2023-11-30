@@ -131,7 +131,10 @@ public class JpaIncidenciasRepositorio implements IncidenciasRepositorio {
         System.out.println("\nTrayendo el Incidencias desde la DB entre N días " + ndias);
         EntityManager entityManager = dao.getEntityManager();
         try {
-            String jpasql = "SELECT DISTINCT e FROM Incidencias e WHERE e.fechaDeApertura >= :fecha1 AND e.fechaDeCierre <= :fecha2 AND e.resuelto = 1";
+            String jpasql = "SELECT MAX(e.resueltos) e FROM Incidencias e COUNT(e.resuelto) AS e.resueltos WHERE e.fechaDeApertura >= :fecha1 "
+                    + "AND e.fechaDeCierre <= :fecha2 "
+                    + "AND e.resuelto"
+                    + "AND e.resuelto = 1";
             List<Incidencias> incidentes = entityManager.createQuery(jpasql, Incidencias.class)
                     .setParameter("fecha1", fecha1)
                     .setParameter("fecha2", fecha2)
