@@ -104,40 +104,44 @@ public class JpaIncidenciasRepositorio implements IncidenciasRepositorio {
 
     @Override
     public List<Incidencias> traerTodoIncidenciasEntreFechas(LocalDate fecha1, LocalDate fecha2) {
-
-        Date fecha3 = Date.valueOf(fecha1);
-        Date fecha4 = Date.valueOf(fecha2);
-        
-        System.out.println("\nTrayendo el Incidencias desde la DB entre fechas");
+        //2023-11-25 	2023-11-28
+        //2023-11-17 	2023-11-20
+        System.out.println("\nTrayendo el Incidencias desde la DB entre fechas " + fecha1 + " y " + fecha2);
         EntityManager entityManager = dao.getEntityManager();
         try {
-//            String jpasql = "SELECT * FROM tbincidencias WHERE FECHADEAPERTURA >= :fecha3 AND FECHADECIERRE <= :fecha4"
-//                    +" AND resuelto = :estado";
             String jpasql = "SELECT e FROM Incidencias e WHERE e.fechaDeApertura >= :fecha1 AND e.fechaDeCierre <= :fecha2 AND e.resuelto = 1";
             List<Incidencias> incidentes = entityManager.createQuery(jpasql, Incidencias.class)
                     .setParameter("fecha1", fecha1)
                     .setParameter("fecha2", fecha2)
                     .getResultList();
-            
             return incidentes;
         } finally {
             entityManager.close();
         }
     }
-//2023-11-25 	2023-11-28
-//2023-11-17 	2023-11-20
-//SELECT * FROM tbincidencias WHERE 
-    //FECHADEAPERTURA >= "2023-11-18" AND 
-    //FECHADECIERRE <= "2023-11-21" AND resuelto = 1;
     
-//        public List<Incidente> obtenerResueltosPorFecha(EEstado estado, LocalDate fecha1, LocalDate fecha2) {
-//            String jpql = "SELECT i FROM Incidente i WHERE i.fechaCreacion>= :fecha1 AND i.fechaCierre <= :fecha2"
-//                    + " AND i.estado = :estado";
-//            List<Incidente> incidentes = em.createQuery(jpql, Incidente.class)
-//                    .setParameter("estado", EEstado.RESUELTO)
-//                    .setParameter("fecha1", fecha1).setParameter("fecha2", fecha2).getResultList();
-//            return incidentes;
-//        }
+    @Override
+    public List<Incidencias> traerTodoIncidenciasEntreNDias(int ndias) {
+        //2023-11-25 	2023-11-28
+        //2023-11-17 	2023-11-20
+        
+        LocalDate fecha2 = LocalDate.now();
+        LocalDate fecha1 = fecha2.minusDays(ndias);
+        
+        System.out.println("\nTrayendo el Incidencias desde la DB entre N días " + ndias);
+        EntityManager entityManager = dao.getEntityManager();
+        try {
+            String jpasql = "SELECT DISTINCT e FROM Incidencias e WHERE e.fechaDeApertura >= :fecha1 AND e.fechaDeCierre <= :fecha2 AND e.resuelto = 1";
+            List<Incidencias> incidentes = entityManager.createQuery(jpasql, Incidencias.class)
+                    .setParameter("fecha1", fecha1)
+                    .setParameter("fecha2", fecha2)
+                    .getResultList();
+            return incidentes;
+        } finally {
+            entityManager.close();
+        }
+    }
+
 //        public Tecnico resueltosporFecha(EEstado estado, LocalDate fecha1, LocalDate fecha2) {
 //            List<Incidente> incidentes = repository.obtenerResueltosPorFecha(estado, fecha1, fecha2);
 //            Map<Tecnico, Long> resueltos = incidentes.stream().collect(Collectors.groupingBy(Incidente::getTecnico, Collectors.counting()));

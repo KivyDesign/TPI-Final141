@@ -39,5 +39,9 @@ public class IncidenciasServicio {
     public List<Incidencias> traerTodoIncidenciasEntreFechas(LocalDate fecha1, LocalDate fecha2) {
         return incidenciasRepositorio.traerTodoIncidenciasEntreFechas(fecha1, fecha2);
     }
+    
+    public List<Incidencias> traerTodoIncidenciasEntreNDias(int ndias) {
+        return incidenciasRepositorio.traerTodoIncidenciasEntreNDias(ndias);
+    }
 
 }

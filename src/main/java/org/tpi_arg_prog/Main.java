@@ -66,32 +66,50 @@ public class Main {
          *       determinada especialidad en los últimos N días
          *    c. Quién fue el técnico que más rápido resolvió los incidentes
          */
-        List<Incidencias> incidentesResueltos = incidenciasServicio.traerTodoIncidenciasEntreFechas(
-                LocalDate.parse("2023-11-17"),
-                LocalDate.parse("2023-11-20")
-        ); 
-        
+        //
+//        // Consulta de prueba entre fechas
+//        // Consultamos entre una fecha de apertura y otra fecha de cierre
+//        List<Incidencias> incidentesResueltos = incidenciasServicio.traerTodoIncidenciasEntreFechas(
+//                LocalDate.parse("2023-11-17"),
+//                LocalDate.parse("2023-11-20")
+//        ); 
+//        //2023-11-25 	2023-11-28
+//        //2023-11-17 	2023-11-20
+//        if (incidentesResueltos != null) {
+//            for (Incidencias nuevoIncidencias : incidentesResueltos) {
+//                System.out.println(
+//                        "\nResueltos: "
+//                        + "\n==========================="
+//                        + "\nid: " + nuevoIncidencias.getId()
+//                        + "\nTécnico: " + nuevoIncidencias.getTecnico().getNombre() + ", " + nuevoIncidencias.getTecnico().getApellido()
+//                        + "\nCliente: " + nuevoIncidencias.getCliente().getNombre() + ", " + nuevoIncidencias.getCliente().getApellido() + " de la empresa " + nuevoIncidencias.getCliente().getDireccion()
+//                        + "\nTipo de Incidencia: " + nuevoIncidencias.getTipo()
+//                        + "\nDescripcion de la Incidencia: " + nuevoIncidencias.getDescripcion()
+//                        + "\nFecha de Apertura: " + nuevoIncidencias.getFechaDeApertura()
+//                        + "\nFecha de Cierre: " + nuevoIncidencias.getFechaDeCierre()
+//                );
+//            }
+//        }
+        //
+        // Consulta de prueba entre fechas
+        // Consultamos entre una fecha de apertura y otra fecha de cierre
+        List<Incidencias> ir = incidenciasServicio.traerTodoIncidenciasEntreNDias(90); 
         //2023-11-25 	2023-11-28
-//2023-11-17 	2023-11-20
-//SELECT * FROM tbincidencias WHERE 
-    //FECHADEAPERTURA >= "2023-11-18" AND 
-    //FECHADECIERRE <= "2023-11-21" AND resuelto = 1;
-        
-        if (incidentesResueltos != null) {
-            for (Incidencias nuevoIncidencias : incidentesResueltos) {
+        //2023-11-17 	2023-11-20
+        if (ir != null) {
+            for (Incidencias nuevoIncidencias : ir) {
                 System.out.println(
                         "\nResueltos: "
                         + "\n==========================="
                         + "\nid: " + nuevoIncidencias.getId()
-                        + "\nTécnico: " + nuevoIncidencias.getTecnico()
-                        + "\nCliente: " + nuevoIncidencias.getCliente()
-                        + "\nTipo: " + nuevoIncidencias.getTipo()
-                        + "\nDescripcion: " + nuevoIncidencias.getDescripcion()
-                        + "\nApertura: " + nuevoIncidencias.getFechaDeApertura()
-                        + "\nCierre: " + nuevoIncidencias.getFechaDeCierre()
+                        + "\nTécnico: " + nuevoIncidencias.getTecnico().getNombre() + ", " + nuevoIncidencias.getTecnico().getApellido()
+                        + "\nCliente: " + nuevoIncidencias.getCliente().getNombre() + ", " + nuevoIncidencias.getCliente().getApellido() + " de la empresa " + nuevoIncidencias.getCliente().getDireccion()
+                        + "\nTipo de Incidencia: " + nuevoIncidencias.getTipo()
+                        + "\nDescripcion de la Incidencia: " + nuevoIncidencias.getDescripcion()
+                        + "\nFecha de Apertura: " + nuevoIncidencias.getFechaDeApertura()
+                        + "\nFecha de Cierre: " + nuevoIncidencias.getFechaDeCierre()
                 );
             }
-
         }
     }
 }

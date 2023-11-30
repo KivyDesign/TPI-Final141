@@ -17,7 +17,9 @@ public interface IncidenciasRepositorio {
     void eliminarIncidencias(Incidencias incidencias);
 
     List<Incidencias> traerTodosIncidencias();
-    
+
     List<Incidencias> traerTodoIncidenciasEntreFechas(LocalDate fecha1, LocalDate fecha2);
+
+    List<Incidencias> traerTodoIncidenciasEntreNDias(int ndias);
 
 }
