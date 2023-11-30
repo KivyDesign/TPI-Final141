@@ -45,28 +45,7 @@ public class Main {
         IncidenciasRepositorio incidenciasRepositorio = new JpaIncidenciasRepositorio(dao);
         incidenciasServicio = new IncidenciasServicio(incidenciasRepositorio);
 
-        /*
-         * Entrega 2
-         * 
-         * En esta segunda iteración nos encargaremos de mapear, mediante
-         * anotaciones JPA, nuestras clases implementadas para poder persistir
-         * el modelo en una Base de Datos Relacional.
-         * Además, comenzaremos con la generación de los repositorios/servicios
-         * para que brinden solución a algunos requerimientos planteados.
-         * 
-         * En particular, en esta entrega se solicita:
-         * 
-         * 1. Modelado de clases con Mapeo (anotaciones JPA) de entidades para
-         *    que las mismas sean persistidas mediante el ORM Hibernate.
-         * 2. Repositorios/Servicios que den solución a los requerimientos
-         *    planteados:
-         *    a. Quién fue el técnico con más incidentes resueltos en los
-         *       últimos N días
-         *    b. Quién fue el técnico con más incidentes resueltos de una
-         *       determinada especialidad en los últimos N días
-         *    c. Quién fue el técnico que más rápido resolvió los incidentes
-         */
-        //
+//        //
 //        // Consulta de prueba entre fechas
 //        // Consultamos entre una fecha de apertura y otra fecha de cierre
 //        List<Incidencias> incidentesResueltos = incidenciasServicio.traerTodoIncidenciasEntreFechas(
@@ -90,27 +69,51 @@ public class Main {
 //                );
 //            }
 //        }
-        //
-        // Consulta de prueba entre fechas
-        // Consultamos entre una fecha de apertura y otra fecha de cierre
-        List<Incidencias> ir = incidenciasServicio.traerTodoIncidenciasEntreNDias(180); 
-        //2023-11-25 	2023-11-28
-        //2023-11-17 	2023-11-20
-        if (ir != null) {
-            for (Incidencias nuevoIncidencias : ir) {
-                System.out.println(
-                        "\nResueltos: "
-                        + "\n==========================="
-                        + "\nid: " + nuevoIncidencias.getId()
-                        + "\nTécnico: " + nuevoIncidencias.getTecnico().getNombre() + ", " + nuevoIncidencias.getTecnico().getApellido()
-                        + "\nCliente: " + nuevoIncidencias.getCliente().getNombre() + ", " + nuevoIncidencias.getCliente().getApellido() + " de la empresa " + nuevoIncidencias.getCliente().getDireccion()
-                        + "\nTipo de Incidencia: " + nuevoIncidencias.getTipo()
-                        + "\nDescripción de la Incidencia: " + nuevoIncidencias.getDescripcion()
-                        + "\nFecha de Apertura: " + nuevoIncidencias.getFechaDeApertura()
-                        + "\nFecha de Cierre: " + nuevoIncidencias.getFechaDeCierre()
-                );
-            }
-        }
+//        //
+//        // Consulta de prueba entre fechas
+//        // Consultamos entre una fecha de apertura y otra fecha de cierre
+//        List<Incidencias> ir = incidenciasServicio.traerTodoIncidenciasEntreNDias(180); 
+//        //2023-11-25 	2023-11-28
+//        //2023-11-17 	2023-11-20
+//        if (ir != null) {
+//            for (Incidencias nuevoIncidencias : ir) {
+//                System.out.println(
+//                        "\nResueltos: "
+//                        + "\n==========================="
+//                        + "\nid: " + nuevoIncidencias.getId()
+//                        + "\nTécnico: " + nuevoIncidencias.getTecnico().getNombre() + ", " + nuevoIncidencias.getTecnico().getApellido()
+//                        + "\nCliente: " + nuevoIncidencias.getCliente().getNombre() + ", " + nuevoIncidencias.getCliente().getApellido() + " de la empresa " + nuevoIncidencias.getCliente().getDireccion()
+//                        + "\nTipo de Incidencia: " + nuevoIncidencias.getTipo()
+//                        + "\nDescripción de la Incidencia: " + nuevoIncidencias.getDescripcion()
+//                        + "\nFecha de Apertura: " + nuevoIncidencias.getFechaDeApertura()
+//                        + "\nFecha de Cierre: " + nuevoIncidencias.getFechaDeCierre()
+//                );
+//            }
+//        }
+        
+        /*
+         * Entrega 2
+         * 
+         * En esta segunda iteración nos encargaremos de mapear, mediante
+         * anotaciones JPA, nuestras clases implementadas para poder persistir
+         * el modelo en una Base de Datos Relacional.
+         * Además, comenzaremos con la generación de los repositorios/servicios
+         * para que brinden solución a algunos requerimientos planteados.
+         * 
+         * En particular, en esta entrega se solicita:
+         * 
+         * 1. Modelado de clases con Mapeo (anotaciones JPA) de entidades para
+         *    que las mismas sean persistidas mediante el ORM Hibernate.
+         * 2. Repositorios/Servicios que den solución a los requerimientos
+         *    planteados:
+         *    a. Quién fue el técnico con más incidentes resueltos en los
+         *       últimos N días
+         *    b. Quién fue el técnico con más incidentes resueltos de una
+         *       determinada especialidad en los últimos N días
+         *    c. Quién fue el técnico que más rápido resolvió los incidentes
+         */
+        
+        List<Incidencias> ir = incidenciasServicio.traerTodoIncidenciasEntreNDias(180);
         
         System.out.println("\n\n" + "=".repeat(60));
         
