@@ -153,6 +153,7 @@ public class Main {
         // resueltas e imprimo su nombre, apellido y el total de incidencias
         // que logro realizar de una determinada especialidad
         //
+        int especialidadABuscar= 1; // Informatico
         Map<Tecnico, Long> resueltosEspecialidades = incidenciasResueltasNDias
                 .stream()
                 .collect(
@@ -171,7 +172,7 @@ public class Main {
         System.out.println("\n\nTécnico con más Incidentes Resueltos en los últimos " + ndias + " días y su Especialidad: "
                 + tecnicoConMasIncidentesResueltosEspecialidades.getNombre() + " "
                 + tecnicoConMasIncidentesResueltosEspecialidades.getApellido() + " con la Especialidad: "
-                + tecnicoConMasIncidentesResueltosEspecialidades.getEspecialidades().get(1).getNombre()
+                + tecnicoConMasIncidentesResueltosEspecialidades.getEspecialidades().get(especialidadABuscar).getNombre()
                 + "\nTotal de incidentes resueltos: " + tecnicoConMasIncidentesResueltosEspecialidades.getIncidenciasResueltas() + "\n\n"
         );
 
@@ -180,7 +181,46 @@ public class Main {
         /*
 	// c) Quién fue el técnico que más rápido resolvió los incidentes
          */
-        
-        
+        Map<Tecnico, Long> resueltoMasRapido = incidenciasResueltasNDias
+                .stream()
+                .collect(
+                        Collectors.groupingBy(Incidencias::getTecnico, Collectors.counting()
+                        )
+                );
+        Tecnico tecnicoConMasIncidentesResueltoMasRapido = resueltoMasRapido
+                .entrySet()
+                .stream()
+                .
+//                .max(
+//                        Map.Entry.comparingByValue()
+//                )
+                .map(Map.Entry::getKey)
+                .orElse(null);
+        /*
+        List<Incidencias> incidenciasResueltasNDias = incidenciasServicio.traerTodoIncidenciasEntreNDias(ndias);
+        List<Tecnico> lista = tecnicoService.traerTodosTecnicos();
+        // Primero verifico que NO este vacia la lista
+        if (lista != null) {
+            for (Tecnico tecnico : lista) {
+                System.out.println(
+                        "\nCliente: "
+                        + "\n----------------------------"
+                        + "\nid: " + tecnico.getId()
+                        + "\nNombre: " + tecnico.getNombre()
+                        + "\nApellido: " + tecnico.getApellido()
+                        + "\nTiempo de Resolución: " + tecnico.getTiempoResolucion() + " hs\n"
+                        + "\nEspecialidades: " + tecnico.getEspecialidades().subList(0, 2)
+                );
+            }
+            System.out.println("================================================");
+        }
+        */
+        for (Incidencias incidenciasResueltasNDia : incidenciasResueltasNDias) {
+            System.out.println("\nIncidencias resueltas: "
+            + "\nNombre: " + tecnicoConMasIncidentesResueltoMasRapido.getNombre()
+            + "\nApellido: " + tecnicoConMasIncidentesResueltoMasRapido.getApellido()
+            + "\nTiempo de Resolución: " + tecnicoConMasIncidentesResueltoMasRapido.getTiempoResolucion()
+            );
+        }
     }
 }

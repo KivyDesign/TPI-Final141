@@ -161,7 +161,7 @@ public class MainDeCargaDeDatos {
         // LocalDate fechaDeCierre,Long tecnico, long cliente
         //2023-11-25 	2023-11-28
         //2023-11-17 	2023-11-20
-        LocalDate apertura = LocalDate.parse("2023-11-25");
+        LocalDate apertura = LocalDate.parse("2023-11-26");
         LocalDate cierre = LocalDate.parse("2023-11-28");
        
         Incidencias incidencias1 = crearIncidencias(
