@@ -177,14 +177,10 @@ public class Main {
 
         System.out.println("=".repeat(60) + "\n\n");
 
-/*
+        /*
 	// c) Quién fue el técnico que más rápido resolvió los incidentes
-	Tecnico tecnicoMasRapido = tecnicoService.obtenerTecnicoConResolucionMasRapida();
-	if (tecnicoMasRapido != null) {
-	dibujarCaja("Técnico que más rápido resolvió los incidentes: " + tecnicoMasRapido.getNombre());
-	} else {
-		dibujarCaja("No se encontraron técnicos con incidentes resueltos.");
-	}
          */
+        
+        
     }
 }
