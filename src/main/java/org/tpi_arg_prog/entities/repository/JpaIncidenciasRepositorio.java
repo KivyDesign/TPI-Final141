@@ -127,15 +127,15 @@ public class JpaIncidenciasRepositorio implements IncidenciasRepositorio {
             entityManager.close();
         }
     }
-    
+
     @Override
     public List<Incidencias> traerTodoIncidenciasEntreNDias(int ndias) {
         //2023-11-25 	2023-11-28
         //2023-11-17 	2023-11-20
-        
+
         LocalDate fecha2 = LocalDate.now();
         LocalDate fecha1 = fecha2.minusDays(ndias);
-        
+
         System.out.println("\nTrayendo las Incidencias desde la DB entre N días " + ndias);
         EntityManager entityManager = dao.getEntityManager();
         try {
@@ -211,5 +211,5 @@ public List<Tecnico> obtenerTecnicosConMasIncidentesEspecialidadResueltosUltimos
             .collect(Collectors.toList());
     return tecnicosConMasIncidentes;
 }
-*/
+     */
 }

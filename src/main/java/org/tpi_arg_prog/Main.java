@@ -168,37 +168,16 @@ public class Main {
                 .map(Map.Entry::getKey)
                 .orElse(null);
 
-        System.out.println("\n\nTécnico con más Incidentes Resueltos en los últimos " + ndias + " días: "
+        System.out.println("\n\nTécnico con más Incidentes Resueltos en los últimos " + ndias + " días y su Especialidad: "
                 + tecnicoConMasIncidentesResueltosEspecialidades.getNombre() + " "
-                + tecnicoConMasIncidentesResueltosEspecialidades.getApellido()
+                + tecnicoConMasIncidentesResueltosEspecialidades.getApellido() + " con la Especialidad: "
+                + tecnicoConMasIncidentesResueltosEspecialidades.getEspecialidades().get(1).getNombre()
                 + "\nTotal de incidentes resueltos: " + tecnicoConMasIncidentesResueltosEspecialidades.getIncidenciasResueltas() + "\n\n"
         );
 
         System.out.println("=".repeat(60) + "\n\n");
 
 /*
-        // consultas
-	int ultimosNDias = 30;
-
-	// a) Quién fue el técnico con más incidentes resueltos en los últimos N días
-	List<Tecnico> tecnicosMasIncidentesUltimosNDias = tecnicoService.obtenerTecnicosConMasIncidentesResueltosUltimosNDias(ultimosNDias);
-	if (!tecnicosMasIncidentesUltimosNDias.isEmpty()) {
-		Tecnico tecnicoMasIncidentes = tecnicosMasIncidentesUltimosNDias.get(0);
-		dibujarCaja("Técnico con más incidentes resueltos en los últimos " + ultimosNDias + " días: " + tecnicoMasIncidentes.getNombre());
-	} else {
-		dibujarCaja("No se encontraron técnicos con incidentes resueltos en los últimos " + ultimosNDias + " días.");
-	}
-
-	// b) Quién fue el técnico con más incidentes resueltos de una determinada especialidad en los últimos N días
-	int especialidadId = 3; //  ID de la especialidad
-	List<Tecnico> tecnicosMasIncidentesEspecialidadUltimosNDias = tecnicoService.obtenerTecnicosConMasIncidentesEspecialidadResueltosUltimosNDias(especialidadId, ultimosNDias);
-	if (!tecnicosMasIncidentesEspecialidadUltimosNDias.isEmpty()) {
-		Tecnico tecnicoMasIncidentesEspecialidad = tecnicosMasIncidentesEspecialidadUltimosNDias.get(0);
-		dibujarCaja("Técnico con más incidentes resueltos de la especialidad "+ especialidadId+" en los últimos " + ultimosNDias + " días: " + tecnicoMasIncidentesEspecialidad.getNombre());
-	} else {
-		dibujarCaja("No se encontraron técnicos con incidentes resueltos de la especialidad en los últimos " + ultimosNDias + " días.");
-	}
-
 	// c) Quién fue el técnico que más rápido resolvió los incidentes
 	Tecnico tecnicoMasRapido = tecnicoService.obtenerTecnicoConResolucionMasRapida();
 	if (tecnicoMasRapido != null) {
