@@ -182,7 +182,7 @@ public class MainDeCargaDeDatos {
         incidenciasServicio.agregarIncidencias(incidencias2);
         
         apertura = LocalDate.parse("2023-11-19");
-        cierre = LocalDate.parse("2023-11-21");
+        cierre = LocalDate.parse("2023-11-23");
         
         Incidencias incidencias3 = crearIncidencias(
                 3L, "Café para la tarde",

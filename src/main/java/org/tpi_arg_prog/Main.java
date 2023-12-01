@@ -1,9 +1,11 @@
 package org.tpi_arg_prog;
 
 import java.time.LocalDate;
+import static java.time.temporal.ChronoUnit.DAYS;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+
 import java.util.stream.Collectors;
 import org.tpi_arg_prog.entities.repository.dao.DAO;
 import org.tpi_arg_prog.entities.repository.dao.JpaDAO;
@@ -153,7 +155,7 @@ public class Main {
         // resueltas e imprimo su nombre, apellido y el total de incidencias
         // que logro realizar de una determinada especialidad
         //
-        int especialidadABuscar= 1; // Informatico
+        int especialidadABuscar = 1; // Informatico
         Map<Tecnico, Long> resueltosEspecialidades = incidenciasResueltasNDias
                 .stream()
                 .collect(
@@ -190,37 +192,29 @@ public class Main {
         Tecnico tecnicoConMasIncidentesResueltoMasRapido = resueltoMasRapido
                 .entrySet()
                 .stream()
-                .
-//                .max(
-//                        Map.Entry.comparingByValue()
-//                )
+                .max(
+                        Map.Entry.comparingByValue()
+                )
                 .map(Map.Entry::getKey)
                 .orElse(null);
-        /*
-        List<Incidencias> incidenciasResueltasNDias = incidenciasServicio.traerTodoIncidenciasEntreNDias(ndias);
-        List<Tecnico> lista = tecnicoService.traerTodosTecnicos();
-        // Primero verifico que NO este vacia la lista
-        if (lista != null) {
-            for (Tecnico tecnico : lista) {
-                System.out.println(
-                        "\nCliente: "
-                        + "\n----------------------------"
-                        + "\nid: " + tecnico.getId()
-                        + "\nNombre: " + tecnico.getNombre()
-                        + "\nApellido: " + tecnico.getApellido()
-                        + "\nTiempo de Resolución: " + tecnico.getTiempoResolucion() + " hs\n"
-                        + "\nEspecialidades: " + tecnico.getEspecialidades().subList(0, 2)
-                );
-            }
-            System.out.println("================================================");
-        }
-        */
+
         for (Incidencias incidenciasResueltasNDia : incidenciasResueltasNDias) {
-            System.out.println("\nIncidencias resueltas: "
-            + "\nNombre: " + tecnicoConMasIncidentesResueltoMasRapido.getNombre()
-            + "\nApellido: " + tecnicoConMasIncidentesResueltoMasRapido.getApellido()
-            + "\nTiempo de Resolución: " + tecnicoConMasIncidentesResueltoMasRapido.getTiempoResolucion()
+
+            long numberOFDays = DAYS.between(
+                    incidenciasResueltasNDia.getFechaDeApertura(),
+                    incidenciasResueltasNDia.getFechaDeCierre()
             );
+
+            System.out.println("\nIncidencias resueltas: "
+                    + "\nNombre: " + incidenciasResueltasNDia.getTecnico().getNombre()
+                    + "\nApellido: " + incidenciasResueltasNDia.getTecnico().getApellido()
+                    + "\nFecha de Apertura: " + incidenciasResueltasNDia.getFechaDeApertura()
+                    + "\nFecha de Cierre: " + incidenciasResueltasNDia.getFechaDeCierre()
+                    + "\nNúmero de días: " + numberOFDays
+            );
+            
+            
+            
         }
     }
 }
