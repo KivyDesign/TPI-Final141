@@ -198,23 +198,32 @@ public class Main {
                 .map(Map.Entry::getKey)
                 .orElse(null);
 
-        for (Incidencias incidenciasResueltasNDia : incidenciasResueltasNDias) {
+        long tiempoMinimoDeResolucion = 30;
 
+        for (Incidencias incidenciasResueltasNDia : incidenciasResueltasNDias) {
             long numberOFDays = DAYS.between(
                     incidenciasResueltasNDia.getFechaDeApertura(),
                     incidenciasResueltasNDia.getFechaDeCierre()
             );
+            if (numberOFDays < tiempoMinimoDeResolucion) {
+                tiempoMinimoDeResolucion = numberOFDays;
+            }
+        }
 
-            System.out.println("\nIncidencias resueltas: "
-                    + "\nNombre: " + incidenciasResueltasNDia.getTecnico().getNombre()
-                    + "\nApellido: " + incidenciasResueltasNDia.getTecnico().getApellido()
-                    + "\nFecha de Apertura: " + incidenciasResueltasNDia.getFechaDeApertura()
-                    + "\nFecha de Cierre: " + incidenciasResueltasNDia.getFechaDeCierre()
-                    + "\nNúmero de días: " + numberOFDays
+        for (Incidencias incidenciasResueltasNDia : incidenciasResueltasNDias) {
+            long numberOFDays = DAYS.between(
+                    incidenciasResueltasNDia.getFechaDeApertura(),
+                    incidenciasResueltasNDia.getFechaDeCierre()
             );
-            
-            
-            
+            if (tiempoMinimoDeResolucion == numberOFDays) {
+                System.out.println("\nIncidencias resueltas: "
+                        + "\nNombre: " + incidenciasResueltasNDia.getTecnico().getNombre()
+                        + "\nApellido: " + incidenciasResueltasNDia.getTecnico().getApellido()
+                        + "\nFecha de Apertura: " + incidenciasResueltasNDia.getFechaDeApertura()
+                        + "\nFecha de Cierre: " + incidenciasResueltasNDia.getFechaDeCierre()
+                        + "\nNúmero de días: " + numberOFDays
+                );
+            }
         }
     }
 }
