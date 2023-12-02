@@ -216,7 +216,7 @@ public class Main {
                     incidenciasResueltasNDia.getFechaDeCierre()
             );
             if (tiempoMinimoDeResolucion == numberOFDays) {
-                System.out.println("\nIncidencias resueltas: "
+                System.out.println("\nTecnico con Incidencias resuelta en menor tiempo: "
                         + "\nNombre: " + incidenciasResueltasNDia.getTecnico().getNombre()
                         + "\nApellido: " + incidenciasResueltasNDia.getTecnico().getApellido()
                         + "\nFecha de Apertura: " + incidenciasResueltasNDia.getFechaDeApertura()
